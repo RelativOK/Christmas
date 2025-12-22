@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Merry Christmas</title>
 
-<!-- Weihnachtliche Schrift -->
 <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -19,33 +18,33 @@ html, body {
 }
 
 /* Sterne */
-.stars::before {
-    content: "✦ ✧ ✦ ✧ ✦ ✧";
+.star {
     position: fixed;
-    top: 10%;
-    left: 5%;
-    font-size: 22px;
-    color: rgba(255,255,255,0.6);
-}
-.stars::after {
-    content: "✧ ✦ ✧ ✦ ✧";
-    position: fixed;
-    top: 20%;
-    right: 8%;
-    font-size: 18px;
-    color: rgba(255,255,255,0.5);
+    color: white;
+    opacity: 0.8;
+    pointer-events: none;
 }
 
-/* Mond */
+/* Sichelmond */
 .moon {
     position: fixed;
     top: 40px;
     right: 40px;
     width: 90px;
     height: 90px;
-    background: #f5f5dc;
     border-radius: 50%;
+    background: #f5f5dc;
     box-shadow: 0 0 40px rgba(255,255,200,0.6);
+}
+.moon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    width: 90px;
+    height: 90px;
+    background: #061425;
+    border-radius: 50%;
 }
 
 /* Karte */
@@ -88,10 +87,10 @@ p {
 /* Baum */
 .tree {
     position: fixed;
-    bottom: 110px;
-    left: 30px;
+    bottom: 120px;
+    left: 40px;
     font-size: 90px;
-    z-index: 3;
+    z-index: 4;
 }
 
 /* Schneeboden */
@@ -103,13 +102,12 @@ p {
     z-index: 3;
 }
 
-/* Schneeflocken (Parallax) */
+/* Schneeflocken */
 .snowflake {
     position: fixed;
     top: -2rem;
     pointer-events: none;
-    animation-name: fall;
-    animation-timing-function: linear;
+    animation: fall linear forwards;
 }
 
 .layer1 { animation-duration: 10s; opacity: 0.9; }
@@ -117,12 +115,10 @@ p {
 .layer3 { animation-duration: 22s; opacity: 0.5; }
 
 @keyframes fall {
-    to {
-        transform: translateY(120vh);
-    }
+    to { transform: translateY(120vh); }
 }
 
-/* Musik-Button */
+/* Musikbutton */
 .music-btn {
     position: fixed;
     bottom: 20px;
@@ -134,16 +130,12 @@ p {
     padding: 10px 14px;
     border-radius: 50px;
     cursor: pointer;
-    font-family: inherit;
 }
-.music-btn:hover {
-    background: rgba(255,255,255,0.3);
-}
+.music-btn:hover { background: rgba(255,255,255,0.3); }
 </style>
 </head>
 <body>
 
-<div class="stars"></div>
 <div class="moon"></div>
 <div class="tree">🎄</div>
 
@@ -173,13 +165,25 @@ Merry Christmas & a happy new year.
 </div>
 </div>
 
-<!-- Musik -->
 <audio id="music" loop>
 <source src="https://cdn.pixabay.com/audio/2022/12/20/audio_8d5a4d3a43.mp3" type="audio/mpeg">
 </audio>
 <button class="music-btn" onclick="toggleMusic()">🎶 Music</button>
 
 <script>
+/* Sterne erzeugen */
+for (let i = 0; i < 60; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.textContent = Math.random() > 0.5 ? "✦" : "✧";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 50 + "vh";
+    star.style.fontSize = (Math.random() * 12 + 8) + "px";
+    star.style.opacity = Math.random() * 0.5 + 0.4;
+    document.body.appendChild(star);
+}
+
+/* Parallax-Schnee */
 const layers = [
     { cls: "layer1", size: [18,26], delay: 250 },
     { cls: "layer2", size: [14,22], delay: 400 },
