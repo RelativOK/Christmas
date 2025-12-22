@@ -24,7 +24,7 @@ html, body {
     pointer-events: none;
 }
 
-/* Mond (voll) */
+/* 🌙 Sichelmond */
 .moon {
     position: fixed;
     top: 40px;
@@ -32,8 +32,18 @@ html, body {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #ffffff, #f5f5dc);
+    background: #f5f5dc;
     box-shadow: 0 0 50px rgba(255,255,220,0.7);
+}
+.moon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 28px;   /* bestimmt die Sichelbreite */
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle at top, #0e2a47, #061425);
+    border-radius: 50%;
 }
 
 /* Karte */
@@ -82,15 +92,6 @@ p {
     z-index: 3;
 }
 
-/* Baum – steht auf Boden */
-.tree {
-    position: fixed;
-    bottom: 180px; /* exakt Bodenhöhe */
-    left: 40px;
-    font-size: 90px;
-    z-index: 4;
-}
-
 /* Schneeflocken */
 .snowflake {
     position: fixed;
@@ -106,27 +107,11 @@ p {
 @keyframes fall {
     to { transform: translateY(120vh); }
 }
-
-/* Musikbutton */
-.music-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
-    color: white;
-    padding: 10px 14px;
-    border-radius: 50px;
-    cursor: pointer;
-}
-.music-btn:hover { background: rgba(255,255,255,0.3); }
 </style>
 </head>
 <body>
 
 <div class="moon"></div>
-<div class="tree">🎄</div>
 
 <!-- Schneeboden -->
 <svg class="ground" viewBox="0 0 1440 180" preserveAspectRatio="none">
@@ -153,11 +138,6 @@ Merry Christmas & a happy new year.
 <div class="footer">— RelativOK —</div>
 </div>
 </div>
-
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/audio/2022/12/20/audio_8d5a4d3a43.mp3" type="audio/mpeg">
-</audio>
-<button class="music-btn" onclick="toggleMusic()">🎶 Music</button>
 
 <script>
 /* Sterne */
@@ -191,11 +171,6 @@ layers.forEach(layer => {
         setTimeout(() => flake.remove(), 25000);
     }, layer.delay);
 });
-
-function toggleMusic() {
-    const music = document.getElementById("music");
-    music.paused ? music.play() : music.pause();
-}
 </script>
 
 </body>
