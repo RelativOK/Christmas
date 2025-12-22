@@ -21,11 +21,10 @@ html, body {
 .star {
     position: fixed;
     color: white;
-    opacity: 0.8;
     pointer-events: none;
 }
 
-/* Sichelmond */
+/* Mond (voll) */
 .moon {
     position: fixed;
     top: 40px;
@@ -33,18 +32,8 @@ html, body {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    background: #f5f5dc;
-    box-shadow: 0 0 40px rgba(255,255,200,0.6);
-}
-.moon::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 18px;
-    width: 90px;
-    height: 90px;
-    background: #061425;
-    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffffff, #f5f5dc);
+    box-shadow: 0 0 50px rgba(255,255,220,0.7);
 }
 
 /* Karte */
@@ -84,15 +73,6 @@ p {
     opacity: 0.85;
 }
 
-/* Baum */
-.tree {
-    position: fixed;
-    bottom: 120px;
-    left: 40px;
-    font-size: 90px;
-    z-index: 4;
-}
-
 /* Schneeboden */
 .ground {
     position: fixed;
@@ -100,6 +80,15 @@ p {
     width: 100%;
     height: 180px;
     z-index: 3;
+}
+
+/* Baum – steht auf Boden */
+.tree {
+    position: fixed;
+    bottom: 180px; /* exakt Bodenhöhe */
+    left: 40px;
+    font-size: 90px;
+    z-index: 4;
 }
 
 /* Schneeflocken */
@@ -171,15 +160,15 @@ Merry Christmas & a happy new year.
 <button class="music-btn" onclick="toggleMusic()">🎶 Music</button>
 
 <script>
-/* Sterne erzeugen */
-for (let i = 0; i < 60; i++) {
+/* Sterne */
+for (let i = 0; i < 70; i++) {
     const star = document.createElement("div");
     star.className = "star";
     star.textContent = Math.random() > 0.5 ? "✦" : "✧";
     star.style.left = Math.random() * 100 + "vw";
-    star.style.top = Math.random() * 50 + "vh";
-    star.style.fontSize = (Math.random() * 12 + 8) + "px";
-    star.style.opacity = Math.random() * 0.5 + 0.4;
+    star.style.top = Math.random() * 45 + "vh";
+    star.style.fontSize = (Math.random() * 14 + 6) + "px";
+    star.style.opacity = Math.random() * 0.6 + 0.3;
     document.body.appendChild(star);
 }
 
