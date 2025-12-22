@@ -2,144 +2,208 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Frohe Weihnachten</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merry Christmas</title>
+
+<!-- Weihnachtliche Schrift -->
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        font-family: Arial, Helvetica, sans-serif;
-        background: linear-gradient(#081726, #0b1c2d);
-        overflow: hidden;
-    }
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: radial-gradient(circle at top, #0e2a47, #061425);
+    overflow: hidden;
+    font-family: 'Mountains of Christmas', cursive;
+}
 
-    /* Karte */
-    .container {
-        position: relative;
-        z-index: 2;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+/* Sterne */
+.stars::before {
+    content: "✦ ✧ ✦ ✧ ✦ ✧";
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    font-size: 22px;
+    color: rgba(255,255,255,0.6);
+}
+.stars::after {
+    content: "✧ ✦ ✧ ✦ ✧";
+    position: fixed;
+    top: 20%;
+    right: 8%;
+    font-size: 18px;
+    color: rgba(255,255,255,0.5);
+}
 
-    .card {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 40px;
-        max-width: 420px;
-        text-align: center;
-        border-radius: 14px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
+/* Mond */
+.moon {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 90px;
+    height: 90px;
+    background: #f5f5dc;
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(255,255,200,0.6);
+}
 
-    h1 {
-        color: #0b1c2d;
-        margin-bottom: 20px;
-    }
+/* Karte */
+.container {
+    position: relative;
+    z-index: 5;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
-    p {
-        color: #333;
-        font-size: 16px;
-        line-height: 1.6;
-    }
+.card {
+    background: rgba(10, 30, 60, 0.96);
+    color: #eef3ff;
+    padding: 40px;
+    max-width: 520px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
 
-    .footer {
-        margin-top: 30px;
-        font-size: 14px;
-        color: #555;
-    }
+h1 {
+    font-size: clamp(28px, 5vw, 38px);
+    margin-bottom: 25px;
+}
 
-    /* Schneeflocken */
-    .snowflake {
-        position: fixed;
-        top: -2rem;
-        font-size: 1.2rem;
-        opacity: 0.9;
-        pointer-events: none;
-        animation-name: fall;
-        animation-timing-function: linear;
-    }
+p {
+    font-size: clamp(18px, 4vw, 22px);
+    line-height: 1.6;
+}
 
-    @keyframes fall {
-        to {
-            transform: translateY(110vh);
-        }
-    }
+.footer {
+    margin-top: 35px;
+    font-size: 20px;
+    opacity: 0.85;
+}
 
-    /* Baum */
-    .tree {
-        position: fixed;
-        bottom: 60px;
-        left: 50px;
-        font-size: 80px;
-        z-index: 1;
-    }
+/* Baum */
+.tree {
+    position: fixed;
+    bottom: 110px;
+    left: 30px;
+    font-size: 90px;
+    z-index: 3;
+}
 
-    /* Schneeboden */
-    .ground {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        height: 80px;
-        background: linear-gradient(#ffffff, #e0e0e0);
-        border-top-left-radius: 40px;
-        border-top-right-radius: 40px;
-        z-index: 1;
+/* Schneeboden */
+.ground {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 180px;
+    z-index: 3;
+}
+
+/* Schneeflocken (Parallax) */
+.snowflake {
+    position: fixed;
+    top: -2rem;
+    pointer-events: none;
+    animation-name: fall;
+    animation-timing-function: linear;
+}
+
+.layer1 { animation-duration: 10s; opacity: 0.9; }
+.layer2 { animation-duration: 16s; opacity: 0.7; }
+.layer3 { animation-duration: 22s; opacity: 0.5; }
+
+@keyframes fall {
+    to {
+        transform: translateY(120vh);
     }
+}
+
+/* Musik-Button */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: inherit;
+}
+.music-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
 </style>
 </head>
 <body>
 
-<!-- Baum -->
+<div class="stars"></div>
+<div class="moon"></div>
 <div class="tree">🎄</div>
 
 <!-- Schneeboden -->
-<div class="ground"></div>
+<svg class="ground" viewBox="0 0 1440 180" preserveAspectRatio="none">
+<path d="
+M0,80
+C120,110 240,60 360,85
+C480,120 600,70 720,95
+C840,130 960,75 1080,100
+C1200,120 1320,90 1440,110
+L1440,180
+L0,180
+Z" fill="#f5f7fa"/>
+</svg>
 
 <div class="container">
-    <div class="card">
-        <h1>🎄 Frohe Weihnachten 🎄</h1>
-        <p>
-            Ich wünsche dir eine besinnliche Weihnachtszeit,<br>
-            Ruhe, Wärme und viele schöne Momente<br>
-            im Kreis deiner Liebsten.
-        </p>
-        <div class="footer">
-            Herzliche Grüße<br>
-            <strong>RelativOK</strong>
-        </div>
-    </div>
+<div class="card">
+<h1>🎄 Merry Christmas 🎄</h1>
+<p>
+The magic of Christmas never ends<br>
+and its greatest gifts are<br>
+family & friends.<br><br>
+Merry Christmas & a happy new year.
+</p>
+<div class="footer">— RelativOK —</div>
+</div>
 </div>
 
+<!-- Musik -->
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2022/12/20/audio_8d5a4d3a43.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn" onclick="toggleMusic()">🎶 Music</button>
+
 <script>
-    const snowflakes = ["❄️"];
-    const maxSnowflakes = 60;
+const layers = [
+    { cls: "layer1", size: [18,26], delay: 250 },
+    { cls: "layer2", size: [14,22], delay: 400 },
+    { cls: "layer3", size: [10,18], delay: 600 }
+];
 
-    function createSnowflake() {
-        if (document.querySelectorAll(".snowflake").length > maxSnowflakes) return;
+layers.forEach(layer => {
+    setInterval(() => {
+        const flake = document.createElement("div");
+        flake.className = `snowflake ${layer.cls}`;
+        flake.textContent = "❄️";
+        flake.style.left = Math.random() * window.innerWidth + "px";
+        flake.style.fontSize =
+            (Math.random() * (layer.size[1]-layer.size[0]) + layer.size[0]) + "px";
+        document.body.appendChild(flake);
+        setTimeout(() => flake.remove(), 25000);
+    }, layer.delay);
+});
 
-        const snowflake = document.createElement("div");
-        snowflake.className = "snowflake";
-        snowflake.textContent = snowflakes[0];
-
-        const size = Math.random() * 20 + 10;
-        const left = Math.random() * window.innerWidth;
-        const duration = Math.random() * 10 + 8;
-
-        snowflake.style.left = left + "px";
-        snowflake.style.fontSize = size + "px";
-        snowflake.style.animationDuration = duration + "s";
-
-        document.body.appendChild(snowflake);
-
-        setTimeout(() => {
-            snowflake.remove();
-        }, duration * 1000);
-    }
-
-    setInterval(createSnowflake, 300);
+function toggleMusic() {
+    const music = document.getElementById("music");
+    music.paused ? music.play() : music.pause();
+}
 </script>
 
 </body>
 </html>
-
